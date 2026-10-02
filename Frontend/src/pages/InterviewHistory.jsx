@@ -8,7 +8,7 @@ function InterviewHistory() {
     const [interviews, setInterviews] = useState([])
     const navigate = useNavigate()
 
-    const ServerUrl = "http://localhost:8000"
+  const ServerUrl = import.meta.env.VITE_SERVER_URL;
 
     useEffect(() => {
 

@@ -7,7 +7,7 @@ import axios from "axios"
 
 function InterviewReport() {
 
-    const ServerUrl = "http://localhost:8000"
+const ServerUrl = import.meta.env.VITE_SERVER_URL;
 
     const {id }=useParams()
     const [report, setReport]=useState(null)

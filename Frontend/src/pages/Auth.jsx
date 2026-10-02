@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import { setUserData } from "../redux/userSlice";
 import { useNavigate } from "react-router-dom";
 
-const ServerUrl = "http://localhost:8000";
+const ServerUrl = import.meta.env.VITE_SERVER_URL;
 
 function Auth({ isModel = false }) {
 

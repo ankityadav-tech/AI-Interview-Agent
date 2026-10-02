@@ -9,7 +9,7 @@ import { setUserData } from '../redux/userSlice';
 
 function Pricing() {
 
-  const ServerUrl = "http://localhost:8000";
+  const ServerUrl = import.meta.env.VITE_SERVER_URL;
 
   const navigate=useNavigate()
   const [selectedPlan,setSelectedPlan]=useState("free");

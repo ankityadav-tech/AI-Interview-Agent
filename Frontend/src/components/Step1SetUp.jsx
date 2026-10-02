@@ -11,7 +11,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserData } from '../redux/userSlice';
 
-const ServerUrl = "http://localhost:8000";
+const ServerUrl = import.meta.env.VITE_SERVER_URL;
 
 function Step1SetUp({ OnStart }) {
 

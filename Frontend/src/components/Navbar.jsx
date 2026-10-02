@@ -9,7 +9,7 @@ import { setUserData } from '../redux/userSlice'
 import AuthModel from './authmodel'
 import axios from "axios"
 
-const ServerUrl = "http://localhost:8000"
+const ServerUrl = import.meta.env.VITE_SERVER_URL;
 
 function Navbar() {
     const { userData } = useSelector((state) => state.user)
