@@ -11,6 +11,7 @@ function Step2Interview({interviewData,onFinish}){
 
     //const { interviewId, questions, userName } = interviewData
 
+    const ServerUrl = import.meta.env.VITE_SERVER_URL;
 
     const{interviewId,questions,userName}=interviewData;
 
@@ -233,13 +234,18 @@ function Step2Interview({interviewData,onFinish}){
         try {
 
 
-            const result=await axios.post("http://localhost:8000/api/interview/submit-answer",{
-                interviewId,
-                questionIndex:currentIndex,
-                answer,
-                timeTaken:
-                   currentQuestion.timeLimit-timeLeft,
-            },{withCredentials:true})
+            const result=await axios.post(
+                ServerUrl + "/api/interview/submit-answer",
+                {
+                    interviewId,
+                    questionIndex:currentIndex,
+                    answer,
+                    timeTaken:
+                       currentQuestion.timeLimit-timeLeft,
+                },
+                {withCredentials:true}
+            )
+
             setFeedback(result.data.feedback)
             speakText(result.data.feedback)
             setIsSubmitting(false) 
@@ -251,6 +257,7 @@ function Step2Interview({interviewData,onFinish}){
         }
 
     }
+
     const handleNext =async()=>{
         setAnswer("")
         setFeedback("");
@@ -267,13 +274,19 @@ function Step2Interview({interviewData,onFinish}){
             if(isMicOn) startMic();
         },500);
     }
+
     const finishInterview=async (params)=>{
         stopMic()
         setIsMicOn(false)
         try {
 
-         const result = await axios.post("http://localhost:8000/api/interview/finish",{
-                interviewId},{withCredentials:true})
+         const result=await axios.post(
+                ServerUrl + "/api/interview/finish",
+                {
+                    interviewId
+                },
+                {withCredentials:true}
+            )
 
                 console.log(result.data)
                 onFinish(result.data)
