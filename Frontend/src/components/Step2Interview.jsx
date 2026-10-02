@@ -225,7 +225,7 @@ function Step2Interview({interviewData,onFinish}){
 
 
 
-    const submitAnswer=async()=>{
+    const submitAnswer=async(autoNext=false)=>{
 
         if(isSubmitting)return;
         stopMic()
@@ -247,7 +247,14 @@ function Step2Interview({interviewData,onFinish}){
             )
 
             setFeedback(result.data.feedback)
-            speakText(result.data.feedback)
+
+            if(autoNext){
+                await speakText(result.data.feedback)
+                await handleNext()
+            }else{
+                speakText(result.data.feedback)
+            }
+
             setIsSubmitting(false) 
         } catch (error) {
 
@@ -303,7 +310,7 @@ function Step2Interview({interviewData,onFinish}){
         if(!currentQuestion)return;
 
         if(timeLeft===0 && !isSubmitting && ! feedback){
-            submitAnswer();
+            submitAnswer(true);
         }
 
     },[timeLeft]);
